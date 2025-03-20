@@ -1,0 +1,68 @@
+using System;
+using StudyPlannerLibrary; // Import the library
+
+class Program
+{
+    static void Main()
+    {
+        StudyPlanner planner = new StudyPlanner();
+
+        while (true)
+        {
+            Console.WriteLine("\n=== Study Planner ===");
+            Console.WriteLine("1. Add Course");
+            Console.WriteLine("2. Remove Course");
+            Console.WriteLine("3. Add Study Hours");
+            Console.WriteLine("4. Remove Study Hours");
+            Console.WriteLine("5. View Courses");
+            Console.WriteLine("6. Exit");
+            Console.Write("Choose an option: ");
+
+            string choice = Console.ReadLine();
+            Console.WriteLine();
+
+            switch (choice)
+            {
+                case "1":
+                    Console.Write("Enter course name: ");
+                    string addCourse = Console.ReadLine();
+                    planner.AddCourse(addCourse);
+                    break;
+
+                case "2":
+                    Console.Write("Enter course name: ");
+                    string removeCourse = Console.ReadLine();
+                    planner.RemoveCourse(removeCourse);
+                    break;
+
+                case "3":
+                    Console.Write("Enter course name: ");
+                    string courseToAddHours = Console.ReadLine();
+                    Console.Write("Enter hours to add: ");
+                    int hoursToAdd = int.Parse(Console.ReadLine());
+                    planner.AddStudyHours(courseToAddHours, hoursToAdd);
+                    break;
+
+                case "4":
+                    Console.Write("Enter course name: ");
+                    string courseToRemoveHours = Console.ReadLine();
+                    Console.Write("Enter hours to remove: ");
+                    int hoursToRemove = int.Parse(Console.ReadLine());
+                    planner.RemoveStudyHours(courseToRemoveHours, hoursToRemove);
+                    break;
+
+                case "5":
+                    planner.ShowCourses();
+                    break;
+
+                case "6":
+                    Console.WriteLine("Goodbye!");
+                    return;
+
+                default:
+                    Console.WriteLine("Invalid choice. Try again.");
+                    break;
+            }
+        }
+    }
+}
