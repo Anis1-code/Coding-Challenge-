@@ -1,0 +1,92 @@
+using System;
+using System.Collections.Generic;
+
+namespace StudyPlannerLibrary
+{
+    public class StudyPlanner
+    {
+        private List<string> courses;
+        private Dictionary<string, int> studyHours;
+
+        public StudyPlanner()
+        {
+            courses = new List<string>();
+            studyHours = new Dictionary<string, int>();
+        }
+
+        // Add a Course
+        public void AddCourse(string courseName)
+        {
+            if (!courses.Contains(courseName))
+            {
+                courses.Add(courseName);
+                studyHours[courseName] = 0;
+                Console.WriteLine($"Course '{courseName}' added successfully!");
+            }
+            else
+            {
+                Console.WriteLine($"Course '{courseName}' is already in your list.");
+            }
+        }
+
+        // Remove a Course
+        public void RemoveCourse(string courseName)
+        {
+            if (courses.Contains(courseName))
+            {
+                courses.Remove(courseName);
+                studyHours.Remove(courseName);
+                Console.WriteLine($"Course '{courseName}' removed.");
+            }
+            else
+            {
+                Console.WriteLine($"Course '{courseName}' not found.");
+            }
+        }
+
+        // Increment Study Hours
+        public void AddStudyHours(string courseName, int hours)
+        {
+            if (studyHours.ContainsKey(courseName))
+            {
+                studyHours[courseName] += hours;
+                Console.WriteLine($"Added {hours} hours to '{courseName}'. Total: {studyHours[courseName]} hours.");
+            }
+            else
+            {
+                Console.WriteLine($"Course '{courseName}' not found.");
+            }
+        }
+
+        // Decrement Study Hours
+        public void RemoveStudyHours(string courseName, int hours)
+        {
+            if (studyHours.ContainsKey(courseName))
+            {
+                studyHours[courseName] = Math.Max(0, studyHours[courseName] - hours);
+                Console.WriteLine($"Removed {hours} hours from '{courseName}'. Total: {studyHours[courseName]} hours.");
+            }
+            else
+            {
+                Console.WriteLine($"Course '{courseName}' not found.");
+            }
+        }
+
+        // Display Course List
+        public void ShowCourses()
+        {
+            if (courses.Count == 0)
+            {
+                Console.WriteLine("No courses added yet.");
+            }
+            else
+            {
+                Console.WriteLine("Your Courses:");
+                foreach (var course in courses)
+                {
+                    Console.WriteLine($"- {course} ({studyHours[course]} hours studied)");
+                }
+            }
+        }
+    }
+}
